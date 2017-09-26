@@ -81,7 +81,8 @@ struct house InputHouse()
     cout << "Enter the price: " << endl;
     cin >> input.price;
 
-    return house;
+    return InputHouse();
+
 }
 
 //void PrintHouse(int houseNum, struct house h)
