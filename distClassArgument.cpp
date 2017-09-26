@@ -18,7 +18,11 @@ private:
     int feet;
     float inches;
 public:
-    int cm;
+    Distance (): feet(0), inches (0) //Constructor with no arguments
+    {}
+    Distance(int ft, float in): feet(ft), inches(in) // Constructor with two arguments
+    {}
+
     void setDist (int f, float i)
     {
         feet = f;
@@ -35,27 +39,49 @@ public:
     {
         cout << "Feet: " << feet << " Inches: " << inches << endl;
     }
+    void addDist(Distance d1, Distance d2);
 };
+
 // Prototypes
 
 // Main Program Program
 int main()
 {
-    Distance d1, d2;
-    d1.setDist(6, 6.5);
-    cout << "Dist 1" << endl;
+    // Create an instance "instantiate" the class
+    Distance d1, d4;
+    Distance d2(8, 2);
+    Distance d3(2, 4);
+
+    // Use methods to set/access data
+    cout << "\nd1 = ";
     d1.showDist();
-
-    d2.getDist();
-    cout <<"Dist 2 " << endl;
+    cout << "\nd2 = ";
     d2.showDist();
+    cout << "\nd3 = ";
+    d3.showDist();
 
-    // Access a public data member
-    d2.cm = 8;
-    cout << "cm is " << d2.cm << endl;
+
+    d4.addDist(d2,d3);
+    cout << "\nd4 = ";
+    d4.showDist();
 
     return 0;
 
 }
 
 // Function Definitions
+/*Belongs to the class. A method for members only
+ * Template: type CLASSNAME::Function_name()
+ * 1) Declare
+ */
+void Distance::addDist(Distance d1, Distance d2)
+{
+    inches = d1.inches + d2.inches; // add the inches
+    feet = 0;
+    if(inches >= 12.0)
+    {
+        inches -= 12.0;
+        feet++;     //check for extra foot
+    }
+    feet += d1.feet + d2.feet; //add feet
+}
